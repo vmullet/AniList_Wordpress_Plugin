@@ -6,7 +6,6 @@
  * Author: Valentin Mullet
  * Author URI: http://lostarchives.fr
  * Version: 1.0
- * Licence: GPLv2
  * Description: A plugin to manage your anime list
  */
 
