@@ -19,7 +19,7 @@ function anilist_load_cache() {
     }
 
 
-//anilist_cacheManager::Instance()->cacheProfile();
+anilist_cacheManager::Instance()->cacheProfile();
 anilist_cacheManager::Instance()->cacheAnimeList();
 
 

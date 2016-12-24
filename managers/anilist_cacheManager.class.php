@@ -3,6 +3,7 @@
 include_once('anilist_connectionManager.class.php');
 include_once('anilist_queryManager.class.php');
 
+
 class anilist_cacheManager
 {
 
@@ -24,7 +25,6 @@ class anilist_cacheManager
 
         return self::$instance;
 
-
     }
 
 
@@ -40,7 +40,31 @@ class anilist_cacheManager
 
                 anilist_connectionManager::Instance()->insert('wp_anilist_animeList',array(
 
-
+                    'record_id' => $record['record_id'],
+                    'series_id' => $record['series_id'],
+                    'list_status' => $record['list_status'],
+                    'score' => $record['score'],
+                    'episodes_watched' => $record['episodes_watched'],
+                    'rewatched' => $record['rewatched'],
+                    'notes' => $record['notes'],
+                    'started_on' => $record['started_on'],
+                    'finished_on' => $record['finished_on'],
+                    'added_time' => $record['added_time'],
+                    'updated_time' => $record['updated_time'],
+                    'anime_title_romaji' => $record['anime']['title_romaji'],
+                    'anime_title_english' => $record['anime']['title_english'],
+                    'anime_title_japanese' => $record['anime']['title_japanese'],
+                    'anime_type' => $record['anime']['type'],
+                    'start_date_airing' => $record['anime']['start_date_fuzzy'],
+                    'end_date_airing' => $record['anime']['end_date_fuzzy'],
+                    'genres' => implode(';',$record['anime']['genres']),
+                    'average_score' => $record['anime']['average_score'],
+                    'img_lge' => $record['anime']['image_url_lge'],
+                    'img_banner' => $record['anime']['image_url_banner'],
+                    'total_episodes' => $record['anime']['total_episodes'],
+                    'airing_status' => $record['anime']['airing_status'],
+                    'popularity' => $record['anime']['popularity'],
+                    'adult' => $record['anime']['adult']
 
                 ));
 

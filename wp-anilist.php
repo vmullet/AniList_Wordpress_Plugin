@@ -17,6 +17,7 @@ include_once('managers/anilist_tokenManager.class.php');
 include_once('cache/anilist_cacheLoader.php');
 include_once('model/anilist_profile.class.php');
 
+
 function anilist_activate() {
 
     if ( get_option( 'anilist_options' ) === false )
@@ -28,7 +29,9 @@ function anilist_activate() {
         $options_array['anilist_client_secret'] = '';
         $options_array['anilist_version'] = '1.0';
         add_option( 'anilist_options', $options_array );
+
     }
+
 }
 
 function anilist_deactivate() {
