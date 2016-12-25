@@ -11,9 +11,6 @@
 
 include_once('menu/anilist-menu-register.php');
 include_once('menu/anilist-menu-displayer.php');
-include_once('managers/anilist_queryManager.class.php');
-include_once('managers/anilist_connectionManager.class.php');
-include_once('managers/anilist_tokenManager.class.php');
 include_once('cache/anilist_cacheLoader.php');
 include_once('model/anilist_profile.class.php');
 include_once('model/anilist_animelist.class.php');
