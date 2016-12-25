@@ -42,7 +42,7 @@ class anilist_cacheManager
 
                     'record_id' => $record['record_id'],
                     'series_id' => $record['series_id'],
-                    'list_status' => $record['list_status'],
+                    'list_status' => str_replace(' ','_',$record['list_status']),
                     'score' => $record['score'],
                     'episodes_watched' => $record['episodes_watched'],
                     'rewatched' => $record['rewatched'],

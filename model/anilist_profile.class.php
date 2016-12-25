@@ -17,10 +17,7 @@ private $nb_anime_dropped;
 private $nb_anime_onhold;
 
 
-private function __construct() {
-
-
-}
+private function __construct() {}
 
 public static function Instance() {
 

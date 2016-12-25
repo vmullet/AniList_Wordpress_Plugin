@@ -16,6 +16,7 @@ include_once('managers/anilist_connectionManager.class.php');
 include_once('managers/anilist_tokenManager.class.php');
 include_once('cache/anilist_cacheLoader.php');
 include_once('model/anilist_profile.class.php');
+include_once('model/anilist_animelist.class.php');
 
 
 function anilist_activate() {

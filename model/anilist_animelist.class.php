@@ -6,6 +6,8 @@ class anilist_animelist{
 
 private static $instance = null;
 
+private $animelist = null;
+
 private function __construct() {}
 
 public static function Instance() {
@@ -22,10 +24,11 @@ public static function Instance() {
 
 public function LoadAnimeList() {
 
-
+    $this->animelist = anilist_connectionManager::Instance()->select('Select * from wp_anilist_animelist');
 
 }
 
+public function AnimeList() {return $this->animelist; }
 
 
 }
