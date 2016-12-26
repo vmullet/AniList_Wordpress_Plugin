@@ -15,6 +15,7 @@ private $nb_anime_plan_watch;
 private $nb_anime_completed;
 private $nb_anime_dropped;
 private $nb_anime_onhold;
+private $nb_anime_total;
 
 
 private function __construct() {}
@@ -43,6 +44,7 @@ public function LoadProfile() {
     $this->nb_anime_completed = $profile[0]['nb_anime_completed'];
     $this->nb_anime_dropped = $profile[0]['nb_anime_dropped'];
     $this->nb_anime_onhold = $profile[0]['nb_anime_onhold'];
+    $this->nb_anime_total = $profile[0]['nb_anime_total'];
 
 }
 
@@ -63,6 +65,8 @@ public function NbAnimeCompleted() {return $this->nb_anime_completed; }
 public function NbAnimeDropped() {return $this->nb_anime_dropped; }
 
 public function NbAnimeOnHold() {return $this->nb_anime_onhold; }
+
+public function NbAnimeTotal() {return $this-> nb_anime_total; }
 
 
 }

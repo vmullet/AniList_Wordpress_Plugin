@@ -32,11 +32,20 @@ class anilist_cacheManager
 
         $lists = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.$this->options['anilist_username'].'/animelist?access_token='.$this->options['anilist_token'])['lists'];
 
+        anilist_connectionManager::Instance()->query('Delete from wp_anilist_characters');
+        anilist_connectionManager::Instance()->query('Delete from wp_anilist_staff');
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_animelist');
 
         foreach($lists as $watch_state) { /* State can be 'Watching','Completed',... */
 
             foreach($watch_state as $record) {
+
+                $anime_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/anime/'.$record['series_id'].'/page?access_token='.$this->options['anilist_token']);
+                $studios="";
+                foreach($anime_data['studio'] as $studio) {
+                    $studios.=$studio['studio_name'].";";
+                }
+                /////////////////////////////////Insert Anime Data Section///////////////////////////////////////////////
 
                 anilist_connectionManager::Instance()->insert('wp_anilist_animeList',array(
 
@@ -51,22 +60,71 @@ class anilist_cacheManager
                     'finished_on' => $record['finished_on'],
                     'added_time' => $record['added_time'],
                     'updated_time' => $record['updated_time'],
-                    'anime_title_romaji' => $record['anime']['title_romaji'],
-                    'anime_title_english' => $record['anime']['title_english'],
-                    'anime_title_japanese' => $record['anime']['title_japanese'],
-                    'anime_type' => $record['anime']['type'],
-                    'start_date_airing' => $record['anime']['start_date_fuzzy'],
-                    'end_date_airing' => $record['anime']['end_date_fuzzy'],
-                    'genres' => implode(';',$record['anime']['genres']),
-                    'average_score' => $record['anime']['average_score'],
-                    'img_lge' => $record['anime']['image_url_lge'],
-                    'img_banner' => $record['anime']['image_url_banner'],
-                    'total_episodes' => $record['anime']['total_episodes'],
-                    'airing_status' => $record['anime']['airing_status'],
-                    'popularity' => $record['anime']['popularity'],
-                    'adult' => $record['anime']['adult']
+                    'anime_title_romaji' => $anime_data['title_romaji'],
+                    'anime_title_english' => $anime_data['title_english'],
+                    'anime_title_japanese' => $anime_data['title_japanese'],
+                    'description' => $anime_data['description'],
+                    'anime_type' => $anime_data['type'],
+                    'start_date_airing' => $anime_data['start_date_fuzzy'],
+                    'end_date_airing' => $anime_data['end_date_fuzzy'],
+                    'genres' => implode(';',$anime_data['genres']),
+                    'studio_name' => $studios,
+                    'average_score' => $anime_data['average_score'],
+                    'img_lge' => $anime_data['image_url_lge'],
+                    'img_banner' => $anime_data['image_url_banner'],
+                    'total_episodes' => $anime_data['total_episodes'],
+                    'airing_status' => $anime_data['airing_status'],
+                    'popularity' => $anime_data['popularity'],
+                    'adult' => $anime_data['adult']
 
                 ));
+
+                //////////////////////////////End Insert Anime Data Section//////////////////////////////////////////////
+
+
+
+                /////////////////////////////////Insert Characters Data Section//////////////////////////////////////////
+                    foreach($anime_data['characters'] as $character) {
+
+                        anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
+
+                                'character_id' => $character['id'],
+                                'name_first' => $character['name_first'],
+                                'name_last' => $character['name_last'],
+                                'img_lge' => $character['image_url_lge'],
+                                'role' => $character['role'],
+                                'series_id' => $record['series_id']
+
+
+                        ));
+
+                    }
+
+
+                //////////////////////////////End Insert Characters Data Section/////////////////////////////////////////
+
+
+                //////////////////////////////Start Insert Staff Data Section////////////////////////////////////////////
+                    foreach($anime_data['staff'] as $staff_member) {
+
+
+                        anilist_connectionManager::Instance()->insert('wp_anilist_staff',array(
+
+                            'staff_id' => $staff_member['id'],
+                            'name_first' => $staff_member['name_first'],
+                            'name_last' => $staff_member['name_last'],
+                            'language' => $staff_member['language'],
+                            'img_lge' => $staff_member['image_url_lge'],
+                            'role' => $staff_member['role'],
+                            'series_id' => $record['series_id']
+
+                        ));
+
+                    }
+
+                //////////////////////////////End Insert Staff Data Section//////////////////////////////////////////////
+
+
 
             }
 
@@ -81,6 +139,12 @@ class anilist_cacheManager
 
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_profile');
 
+        $total_anime = $response['stats']['status_distribution']['anime']['watching']
+                        +$response['stats']['status_distribution']['anime']['plan to watch']
+                        +$response['stats']['status_distribution']['anime']['completed']
+                        +$response['stats']['status_distribution']['anime']['dropped']
+                        +$response['stats']['status_distribution']['anime']['on-hold'];
+
         anilist_connectionManager::Instance()->insert('wp_anilist_profile',array(
 
             'id' => $response['id'],
@@ -91,7 +155,8 @@ class anilist_cacheManager
             'nb_anime_plan_watch' => $response['stats']['status_distribution']['anime']['plan to watch'],
             'nb_anime_completed' => $response['stats']['status_distribution']['anime']['completed'],
             'nb_anime_dropped' => $response['stats']['status_distribution']['anime']['dropped'],
-            'nb_anime_onhold' => $response['stats']['status_distribution']['anime']['on-hold']
+            'nb_anime_onhold' => $response['stats']['status_distribution']['anime']['on-hold'],
+            'nb_anime_total' => $total_anime
 
         ));
 
