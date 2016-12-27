@@ -65,6 +65,7 @@ class anilist_cacheManager
                     'anime_title_japanese' => $anime_data['title_japanese'],
                     'description' => $anime_data['description'],
                     'anime_type' => $anime_data['type'],
+                    'season' => $anime_data['season'],
                     'start_date_airing' => $anime_data['start_date_fuzzy'],
                     'end_date_airing' => $anime_data['end_date_fuzzy'],
                     'genres' => implode(';',$anime_data['genres']),
@@ -85,8 +86,27 @@ class anilist_cacheManager
 
                 /////////////////////////////////Insert Characters Data Section//////////////////////////////////////////
                     foreach($anime_data['characters'] as $character) {
+                        if (isset($character['actor'][0])) {
+                            anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
 
-                        anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
+                                'character_id' => $character['id'],
+                                'name_first' => $character['name_first'],
+                                'name_last' => $character['name_last'],
+                                'img_lge' => $character['image_url_lge'],
+                                'role' => $character['role'],
+                                'series_id' => $record['series_id'],
+                                'actor_name_first' => $character['actor'][0]['name_first'],
+                                'actor_name_last' => $character['actor'][0]['name_last'],
+                                'actor_img_lge' => $character['actor'][0]['image_url_lge'],
+                                'actor_language' => $character['actor'][0]['language'],
+                                'actor_role' => $character['actor'][0]['role']
+
+
+                            ));
+                        }
+                        else
+                        {
+                            anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
 
                                 'character_id' => $character['id'],
                                 'name_first' => $character['name_first'],
@@ -95,8 +115,9 @@ class anilist_cacheManager
                                 'role' => $character['role'],
                                 'series_id' => $record['series_id']
 
+                            ));
+                        }
 
-                        ));
 
                     }
 
