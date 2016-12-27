@@ -16,6 +16,7 @@ class anilist_anime {
     private $anime_title_japanese;
     private $description;
     private $anime_type;
+    private $season;
     private $start_date_airing;
     private $end_date_airing;
     private $genres;
@@ -56,7 +57,7 @@ class anilist_anime {
      * @param $popularity
      * @param $adult
      */
-    public function __construct($series_id, $list_status, $score, $episodes_watched, $notes, $started_on, $finished_on, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
+    public function __construct($series_id, $list_status, $score, $episodes_watched, $notes, $started_on, $finished_on, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $season, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
     {
         $this->series_id = $series_id;
         $this->list_status = $list_status;
@@ -72,6 +73,7 @@ class anilist_anime {
         $this->anime_title_japanese = $anime_title_japanese;
         $this->description = $description;
         $this->anime_type = $anime_type;
+        $this->season = $season;
         $this->start_date_airing = $start_date_airing;
         $this->end_date_airing = $end_date_airing;
         $this->genres = $genres;
@@ -313,6 +315,24 @@ class anilist_anime {
     /**
      * @return mixed
      */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param mixed $season
+     */
+    public function setSeason($season)
+    {
+        $this->season = $season;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
     public function getStartDateAiring()
     {
         return $this->start_date_airing;
@@ -485,8 +505,6 @@ class anilist_anime {
     {
         $this->adult = $adult;
     }
-
-
 
 
 

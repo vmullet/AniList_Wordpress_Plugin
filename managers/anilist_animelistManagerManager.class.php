@@ -3,7 +3,7 @@
 include_once(dirname(__FILE__).'/anilist_connectionManager.class.php');
 include_once(dirname(__FILE__,2) . '/model/anilist_anime.class.php');
 
-class anilist_animelist{
+class anilist_animelistManager{
 
 private static $instance = null;
 
@@ -13,7 +13,7 @@ public static function Instance() {
 
     if (!isset(self::$instance)) {
 
-        self::$instance = new anilist_animelist();
+        self::$instance = new anilist_animelistManager();
     }
 
     return self::$instance;
@@ -82,6 +82,7 @@ public function LoadAnime($anime_id) {
         $anime_data['anime_title_japanese'],
         $anime_data['description'],
         $anime_data['anime_type'],
+        $anime_data['season'],
         $anime_data['start_date_airing'],
         $anime_data['end_date_airing'],
         $anime_data['genres'],
