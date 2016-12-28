@@ -41,10 +41,7 @@ class anilist_cacheManager
             foreach($watch_state as $record) {
 
                 $anime_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/anime/'.$record['series_id'].'/page?access_token='.$this->options['anilist_token']);
-                $studios="";
-                foreach($anime_data['studio'] as $studio) {
-                    $studios.=$studio['studio_name'].";";
-                }
+
                 /////////////////////////////////Insert Anime Data Section///////////////////////////////////////////////
 
                 anilist_connectionManager::Instance()->insert('wp_anilist_animeList',array(
@@ -69,7 +66,7 @@ class anilist_cacheManager
                     'start_date_airing' => $anime_data['start_date_fuzzy'],
                     'end_date_airing' => $anime_data['end_date_fuzzy'],
                     'genres' => implode(';',$anime_data['genres']),
-                    'studio_name' => $studios,
+                    'studio_name' => implode(';',array_column($anime_data['studio'],'studio_name')),
                     'average_score' => $anime_data['average_score'],
                     'img_lge' => $anime_data['image_url_lge'],
                     'img_banner' => $anime_data['image_url_banner'],

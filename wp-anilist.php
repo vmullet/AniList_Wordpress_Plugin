@@ -13,7 +13,7 @@ include_once('menu/anilist-menu-register.php');
 include_once('menu/anilist-menu-displayer.php');
 include_once('cache/anilist_cacheLoader.php');
 include_once('model/anilist_profile.class.php');
-include_once('managers/anilist_animelistManagerManager.class.php');
+include_once('managers/anilist_animelistManager.class.php');
 
 
 function anilist_activate() {
