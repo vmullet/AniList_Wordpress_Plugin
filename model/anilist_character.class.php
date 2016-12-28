@@ -6,16 +6,36 @@ require_once ('anilist_staff.class.php');
 class anilist_character extends anilist_person {
 
     private $character_id;
+    private $info;
 
     private $actor;
 
 
-    public function __construct($character_id,$name_first,$name_last,$img_lge,$role,$series_id,$actor_name_first,$actor_name_last,$actor_img_lge,$actor_language,$actor_role)
+    public function __construct($character_id,$name_first,$name_last,$info,$img_lge,$role,$series_id,$actor_name_first,$actor_name_last,$actor_img_lge,$actor_language,$actor_role)
     {
         $this->staff_id = $character_id;
+        $this->info = $info;
         parent::__construct($name_first,$name_last,$img_lge,$role,$series_id);
         $this->actor = new anilist_staff($actor_name_first,$actor_name_last,$actor_language,$actor_img_lge,$actor_role,$series_id);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+    /**
+     * @param mixed $info
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+    }
+
+
 
     /**
      * @return anilist_staff

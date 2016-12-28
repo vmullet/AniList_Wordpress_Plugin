@@ -79,16 +79,21 @@ class anilist_cacheManager
 
                 //////////////////////////////End Insert Anime Data Section//////////////////////////////////////////////
 
+                //https://anilist.co/api/character/24184?access_token=OpawlEFYyca2j3f13LxqXoE0mcrqA9m9rXFDaM7N
 
 
                 /////////////////////////////////Insert Characters Data Section//////////////////////////////////////////
                     foreach($anime_data['characters'] as $character) {
+
+                        $character_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/character/'.$character['id'].'/page?access_token='.$this->options['anilist_token']);
+
                         if (isset($character['actor'][0])) {
                             anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
 
                                 'character_id' => $character['id'],
                                 'name_first' => $character['name_first'],
                                 'name_last' => $character['name_last'],
+                                'info' => $character_data['info'],
                                 'img_lge' => $character['image_url_lge'],
                                 'role' => $character['role'],
                                 'series_id' => $record['series_id'],
@@ -108,6 +113,7 @@ class anilist_cacheManager
                                 'character_id' => $character['id'],
                                 'name_first' => $character['name_first'],
                                 'name_last' => $character['name_last'],
+                                'info' => $character_data['info'],
                                 'img_lge' => $character['image_url_lge'],
                                 'role' => $character['role'],
                                 'series_id' => $record['series_id']

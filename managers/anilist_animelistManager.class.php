@@ -119,6 +119,7 @@ public function LoadCharacters($anime_id) {
             $character_data['character_id'],
             $character_data['name_first'],
             $character_data['name_last'],
+            $character_data['info'],
             $character_data['img_lge'],
             $character_data['role'],
             $character_data['series_id'],

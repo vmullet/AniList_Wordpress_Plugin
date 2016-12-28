@@ -16,6 +16,9 @@ function anilist_display_settings()
             <?php submit_button();?>
 
         </form>
+        <form action="http://localhost/test/load-cache/">
+            <input type="submit" value="Load/Refresh Cache" />
+        </form>
     </div>
 
 

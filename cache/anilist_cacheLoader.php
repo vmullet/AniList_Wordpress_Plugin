@@ -5,6 +5,7 @@ include_once(dirname(__FILE__,2).'/managers/anilist_cacheManager.class.php');
 include_once(dirname(__FILE__,2).'/managers/anilist_tokenManager.class.php');
 
 function anilist_load_cache() {
+    set_time_limit(0);
 
     if (!anilist_tokenManager::Instance()->isTokenValid()) {
 
@@ -22,7 +23,7 @@ function anilist_load_cache() {
 anilist_cacheManager::Instance()->cacheProfile();
 anilist_cacheManager::Instance()->cacheAnimeList();
 
-
+header('Location: http://localhost/test/wp-admin/options-general.php?page=wp-anilist%2Fmenu%2Fanilist-menu-register.php',0);
 
 }
 
