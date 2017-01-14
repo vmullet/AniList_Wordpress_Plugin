@@ -84,27 +84,27 @@ Then , in your admin dashboard, go to the **Settings->AniList API** and fill the
 - You have to create a php template file containing the following code at the root of your theme directory :
 
     
-    /* 
-    Template Name: AniList Cache Load
-     */
+        /* 
+        Template Name: AniList Cache Load
+        */
     
-    get_header();
+        get_header();
 
-    if (!anilist_tokenManager::Instance()->isTokenValid()) {
+        if (!anilist_tokenManager::Instance()->isTokenValid()) {
 
-    $token = anilist_tokenManager::Instance()->options['anilist_token'];
-    echo "The token ".$token." is not valid anymore";
+        $token = anilist_tokenManager::Instance()->options['anilist_token'];
+        echo "The token ".$token." is not valid anymore";
 
-    anilist_tokenManager::Instance()->refreshToken();
+        anilist_tokenManager::Instance()->refreshToken();
 
-    $token = anilist_tokenManager::Instance()->options['anilist_token'];
-    echo 'It was replaced by '.$token;
+        $token = anilist_tokenManager::Instance()->options['anilist_token'];
+        echo 'It was replaced by '.$token;
 
-    }
+        }
 
-    anilist_load_cache();
+        anilist_load_cache();
 
-    get_footer();
+        get_footer();
 
 - After that , create a new blank page based on the template 'AniList Cache Load' and run it .
 
@@ -113,15 +113,15 @@ Then , in your admin dashboard, go to the **Settings->AniList API** and fill the
 - And to display all of these data, you can create your own aniList template and put some code like this at the top :
 
 
-    /*
-    Template Name: AniList AnimeList
-    */
+        /*
+        Template Name: AniList AnimeList
+        */
 
-    $ani_profile = anilist_profile::Instance();
-    $ani_list = anilist_animelistManager::Instance();
+        $ani_profile = anilist_profile::Instance();
+        $ani_list = anilist_animelistManager::Instance();
 
-    $ani_profile->LoadProfile();
-    $animeList = $ani_list->LoadAnimeList();
+        $ani_profile->LoadProfile();
+        $animeList = $ani_list->LoadAnimeList();
     
 _Note : $animelist is an array of anime objects_
 
