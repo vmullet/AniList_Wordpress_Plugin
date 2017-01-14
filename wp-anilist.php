@@ -16,7 +16,6 @@ include_once('model/anilist_profile.class.php');
 include_once('managers/anilist_connectionManager.class.php');
 include_once('managers/anilist_animelistManager.class.php');
 
-
 function anilist_activate() {
 
     if ( get_option( 'anilist_options' ) === false )
