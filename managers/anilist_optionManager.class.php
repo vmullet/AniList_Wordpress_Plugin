@@ -105,12 +105,12 @@ class anilist_optionManager {
 
     public function get_client_secret() {
 
-        return $this->anilist_options[self::ANILIST_CLIENT_ID];
+        return $this->anilist_options[self::ANILIST_CLIENT_SECRET];
     }
 
     public function get_token() {
 
-        return $this->anilist_options[self::ANILIST_CLIENT_ID];
+        return $this->anilist_options[self::ANILIST_TOKEN];
     }
 
     public function get_refresh_token() {
