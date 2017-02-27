@@ -1,8 +1,5 @@
 <?php
 
-include_once('anilist_connectionManager.class.php');
-include_once('anilist_queryManager.class.php');
-
 
 class anilist_cacheManager
 {

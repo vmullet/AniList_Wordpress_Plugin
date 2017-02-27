@@ -1,17 +1,14 @@
 <?php
 
-include_once('anilist_queryManager.class.php');
+require_once('anilist_queryManager.class.php');
 
 
 class anilist_tokenManager {
 
     private static $instance = null;
-    public $options;
 
 
     private function __construct() {
-
-        $this->options = get_option('anilist_options');
     }
 
 
@@ -29,11 +26,11 @@ class anilist_tokenManager {
 
     public function isTokenValid() {
 
-        if ($this->options['anilist_token']=='') {
+        if (anilist_optionManager::Instance()->get_token()=='') {
             return false;
         }
         else {
-            $response_code = anilist_queryManager::Instance()->getStatusCode('https://anilist.co/api/user/' . $this->options['anilist_username'] . '?access_token=' . $this->options['anilist_token']);
+            $response_code = anilist_queryManager::Instance()->getStatusCode('https://anilist.co/api/user/' . anilist_optionManager::Instance()->get_username() . '?access_token=' . anilist_optionManager::Instance()->get_token());
 
             if ($response_code != '200')
                 return false;
@@ -45,10 +42,9 @@ class anilist_tokenManager {
 
     public function refreshToken() {
 
-        $response = anilist_queryManager::Instance()->post('https://anilist.co/api/auth/access_token?grant_type=refresh_token&client_id='.$this->options['anilist_client_id'].'&client_secret='.$this->options['anilist_client_secret'].'&refresh_token='.$this->options['anilist_refresh_token']);
+        $response = anilist_queryManager::Instance()->post('https://anilist.co/api/auth/access_token?grant_type=refresh_token&client_id='.anilist_optionManager::Instance()->get_clientId().'&client_secret='.anilist_optionManager::Instance()->get_client_secret().'&refresh_token='.anilist_optionManager::Instance()->get_refresh_token());
 
-        $this->options['anilist_token'] = $response['access_token'];
-        update_option('anilist_options',$this->options);
+        anilist_optionManager::Instance()->set_token($response['access_token']);
 
 
     }

@@ -3,11 +3,14 @@
 function anilist_display_settings()
 {
 
+$last_che_load_start = anilist_optionManager::Instance()->get_last_cache_load_start();
+$last_cache_load_end = anilist_optionManager::Instance()->get_last_cache_load_end();
+
 ?>
 
     <div class="wrap">
 
-        <h2>AniList API Settings</h2>
+        <h2>AniList API Settings (Last cache load : From <?php echo $last_che_load_start; ?> To <?php echo $last_cache_load_end; ?></h2>
 
         <form method="post" action="options.php">
 

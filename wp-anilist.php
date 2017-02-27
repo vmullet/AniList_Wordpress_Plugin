@@ -11,43 +11,31 @@
 
 include_once('menu/anilist-menu-register.php');
 include_once('menu/anilist-menu-displayer.php');
-include_once('cache/anilist_cacheLoader.php');
-include_once('model/anilist_profile.class.php');
-include_once('managers/anilist_connectionManager.class.php');
-include_once('managers/anilist_animelistManager.class.php');
+
+require_once('managers/anilist_pluginManager.class.php');
+require_once('managers/anilist_tokenManager.class.php');
+require_once('managers/anilist_cacheManager.class.php');
+require_once('managers/anilist_optionManager.class.php');
+require_once('managers/anilist_connectionManager.class.php');
+require_once('managers/anilist_queryManager.class.php');
+require_once('managers/anilist_animelistManager.class.php');
 
 function anilist_activate() {
 
-    if ( get_option( 'anilist_options' ) === false )
-    {
-        $options_array['anilist_username'] = '';
-        $options_array['anilist_token'] = '';
-        $options_array['anilist_refresh_token'] = '';
-        $options_array['anilist_client_id'] = '';
-        $options_array['anilist_client_secret'] = '';
-        $options_array['anilist_version'] = '1.0';
-        add_option( 'anilist_options', $options_array );
+    anilist_pluginManager::Instance()->create_options();
+    anilist_pluginManager::Instance()->create_tables();
+    anilist_pluginManager::Instance()->create_files();
+    anilist_pluginManager::Instance()->create_pages();
 
-    }
-
-    $table_animelist = file_get_contents(dirname(__FILE__).'/sql/wp_anilist_animelist.sql');
-    $table_profile = file_get_contents(dirname(__FILE__).'/sql/wp_anilist_profile.sql');
-    $table_characters = file_get_contents(dirname(__FILE__).'/sql/wp_anilist_characters.sql');
-    $table_staff = file_get_contents(dirname(__FILE__).'/sql/wp_anilist_staff.sql');
-
-    anilist_connectionManager::Instance()->query($table_profile);
-    anilist_connectionManager::Instance()->query($table_animelist);
-    anilist_connectionManager::Instance()->query($table_characters);
-    anilist_connectionManager::Instance()->query($table_staff);
 
 }
 
 function anilist_deactivate() {
 
-    if ( get_option( 'anilist_options' ) !== null )
-    {
-        delete_option( 'anilist_options' );
-    }
+    anilist_pluginManager::Instance()->remove_options();
+    anilist_pluginManager::Instance()->remove_tables();
+    anilist_pluginManager::Instance()->remove_files();
+    anilist_pluginManager::Instance()->remove_pages();
 
 }
 
