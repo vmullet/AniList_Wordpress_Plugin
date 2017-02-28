@@ -19,6 +19,7 @@ require_once('managers/anilist_optionManager.class.php');
 require_once('managers/anilist_connectionManager.class.php');
 require_once('managers/anilist_queryManager.class.php');
 require_once('managers/anilist_animelistManager.class.php');
+require_once('model/anilist_profile.class.php');
 
 function anilist_activate() {
 

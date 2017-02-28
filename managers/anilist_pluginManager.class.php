@@ -27,36 +27,36 @@ class anilist_pluginManager {
 
     public function create_options() {
 
-        devfolio_optionManager::Instance()->init_options();
+        anilist_optionManager::Instance()->init_options();
 
     }
 
     public function remove_options() {
 
-        devfolio_optionManager::Instance()->erase_options();
+        anilist_optionManager::Instance()->erase_options();
 
     }
 
     public function create_tables() {
 
-        $animelist_table  = file_get_contents(dirname(__FILE__,2) . '/wp_anilist_animelist');
+        $animelist_table  = file_get_contents(dirname(__FILE__,2) . '/sql/wp_anilist_animelist.sql');
         $character_table   = file_get_contents(dirname(__FILE__,2) . '/sql/wp_anilist_characters.sql');
         $staff_table  = file_get_contents(dirname(__FILE__,2) . '/sql/wp_anilist_staff.sql');
         $profile_table  = file_get_contents(dirname(__FILE__,2) . '/sql/wp_anilist_profile.sql');
 
-        devfolio_connectionManager::Instance()->query($animelist_table);
-        devfolio_connectionManager::Instance()->query($character_table);
-        devfolio_connectionManager::Instance()->query($staff_table);
-        devfolio_connectionManager::Instance()->query($profile_table);
+        anilist_connectionManager::Instance()->query($animelist_table);
+        anilist_connectionManager::Instance()->query($character_table);
+        anilist_connectionManager::Instance()->query($staff_table);
+        anilist_connectionManager::Instance()->query($profile_table);
 
     }
 
     public function remove_tables() {
 
-        devfolio_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_characters');
-        devfolio_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_staff');
-        devfolio_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_animelist');
-        devfolio_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_profile');
+        anilist_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_characters');
+        anilist_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_staff');
+        anilist_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_animelist');
+        anilist_connectionManager::Instance()->query('DROP TABLE IF EXISTS wp_anilist_profile');
 
     }
 
@@ -71,7 +71,7 @@ class anilist_pluginManager {
             'post_author' => '1',
             'post_status' => 'publish',
             'post_type' => 'page',
-            'post_name' => 'devfolio-cache',
+            'post_name' => 'anilist-cache',
             'page_template' => 'template-anilist-cache.php'
         );
 

@@ -168,6 +168,57 @@ public function LoadStaff($anime_id) {
     return $staff_list;
 }
 
+	/**
+	* @return anilist_anime[]
+	**/
+public function SearchAnime($keyword) {
+	
+	$results = anilist_queryManager::Instance()->getBody('https://anilist.co/api/anime/search/'.$keyword.'?access_token='.anilist_optionManager::Instance()->get_token());
+	
+	$anilist_results = array();
+	
+	foreach($results as $anime_data) {
+		
+		$anime = new anilist_anime(
+		$anime_data['id'],
+        '#list_status',
+        $anime_data['score'],
+        '-1',
+        $anime_data['notes'],
+        $anime_data['started_on'],
+        $anime_data['finished_on'],
+        $anime_data['added_time'],
+        $anime_data['updated_time'],
+        $anime_data['title_romaji'],
+        $anime_data['title_english'],
+        $anime_data['title_japanese'],
+        $anime_data['description'],
+        $anime_data['type'],
+        $anime_data['season'],
+        $anime_data['start_date_fuzzy'],
+        $anime_data['end_date_fuzzy'],
+        implode(';',$anime_data['genres']),
+        '',
+        $anime_data['average_score'],
+        $anime_data['image_url_lge'],
+        '#banner',
+        $anime_data['total_episodes'],
+        $anime_data['airing_status'],
+        $anime_data['popularity'],
+        $anime_data['adult']
+		
+		
+		
+		);
+		
+		$anilist_results[] = $anime;
+		
+	}
+	
+	return $anilist_results;
+	
+}
+
 
 
 

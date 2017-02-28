@@ -1,16 +1,12 @@
 <?php
 
-/*
-Template Name: AniListCache V2
-*/
-
-anilist_optionManager::Instance()->load_options();
+devfolio_optionManager::Instance()->load_options();
 
 if (anilist_optionManager::Instance()->are_options_valid()) {
 
     set_time_limit(0);
 
-    anilist_optionManager::Instance()->set_is_caching(true);
+    devfolio_optionManager::Instance()->set_is_caching(true);
 
     anilist_optionManager::Instance()->set_last_cache_load_start(date('d-m-Y H:i:s'));
 
@@ -34,7 +30,7 @@ if (anilist_optionManager::Instance()->are_options_valid()) {
 
     anilist_optionManager::Instance()->set_last_cache_load_end(date('d-m-Y H:i:s'));
 
-    anilist_optionManager::Instance()->set_is_caching(false);
+    devfolio_optionManager::Instance()->set_is_caching(false);
 
 }
 else

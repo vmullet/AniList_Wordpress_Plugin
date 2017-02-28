@@ -45,18 +45,18 @@ class anilist_optionManager {
 
     public function init_options() {
 
-        if (!isset($this->devfolio_options)) {
-            $this->devfolio_options[self::ANILIST_USERNAME] = '';
-            $this->devfolio_options[self::ANILIST_CLIENT_ID] = '';
-            $this->devfolio_options[self::ANILIST_CLIENT_SECRET] = '';
-            $this->devfolio_options[self::ANILIST_TOKEN] = '';
-            $this->devfolio_options[self::ANILIST_REFRESH_TOKEN] = '';
-            $this->devfolio_options[self::ANILIST_IS_CACHING] = false;
-            $this->devfolio_options[self::ANILIST_LAST_CACHE_LOAD_START] = '';
-            $this->devfolio_options[self::ANILIST_LAST_CACHE_LOAD_END] = '';
-            $this->devfolio_options[self::ANILIST_VERSION] = '1.0';
+        if (!isset($this->anilist_options)) {
+            $this->anilist_options[self::ANILIST_USERNAME] = '';
+            $this->anilist_options[self::ANILIST_CLIENT_ID] = '';
+            $this->anilist_options[self::ANILIST_CLIENT_SECRET] = '';
+            $this->anilist_options[self::ANILIST_TOKEN] = '';
+            $this->anilist_options[self::ANILIST_REFRESH_TOKEN] = '';
+            $this->anilist_options[self::ANILIST_IS_CACHING] = false;
+            $this->anilist_options[self::ANILIST_LAST_CACHE_LOAD_START] = '';
+            $this->anilist_options[self::ANILIST_LAST_CACHE_LOAD_END] = '';
+            $this->anilist_options[self::ANILIST_VERSION] = '1.0';
 
-            add_option(self::ANILIST_OPTIONS,$this->devfolio_options);
+            add_option(self::ANILIST_OPTIONS,$this->anilist_options);
         }
 
 
@@ -64,9 +64,9 @@ class anilist_optionManager {
 
     public function erase_options() {
 
-        if (isset($this->devfolio_options)) {
+        if (isset($this->anilist_options)) {
             delete_option(self::ANILIST_OPTIONS);
-            $this->devfolio_options = null;
+            $this->anilist_options = null;
         }
     }
 
@@ -81,7 +81,6 @@ class anilist_optionManager {
         if ($this->anilist_options[self::ANILIST_USERNAME] != ''
             &&$this->anilist_options[self::ANILIST_CLIENT_ID] != ''
             &&$this->anilist_options[self::ANILIST_CLIENT_SECRET] != ''
-            &&$this->anilist_options[self::ANILIST_TOKEN] != ''
             &&$this->anilist_options[self::ANILIST_REFRESH_TOKEN] !='')
         {
             return true;

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `wp_anilist_animelist` (
   `updated_time` datetime NOT NULL,
   `anime_title_romaji` text NOT NULL,
   `anime_title_english` text NOT NULL,
-  `anime_title_japanese` text CHARACTER SET utf8 NOT NULL,
+  `anime_title_japanese` text NOT NULL,
   `description` text NOT NULL,
   `anime_type` varchar(25) NOT NULL,
   `season` varchar(5) DEFAULT NULL,

@@ -5,10 +5,10 @@ class anilist_cacheManager
 {
 
     private static $instance = null;
-    private $options;
+
 
     private function __construct() {
-        $this->options = get_option('anilist_options');
+
     }
 
     public static function Instance()
@@ -27,7 +27,7 @@ class anilist_cacheManager
 
     public function cacheAnimeList() {
 
-        $lists = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.$this->options['anilist_username'].'/animelist?access_token='.$this->options['anilist_token'])['lists'];
+        $lists = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.anilist_optionManager::Instance()->get_username().'/animelist?access_token='.anilist_optionManager::Instance()->get_token())['lists'];
 
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_characters');
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_staff');
@@ -37,7 +37,7 @@ class anilist_cacheManager
 
             foreach($watch_state as $record) {
 
-                $anime_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/anime/'.$record['series_id'].'/page?access_token='.$this->options['anilist_token']);
+                $anime_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/anime/'.$record['series_id'].'/page?access_token='.anilist_optionManager::Instance()->get_token());
 
                 /////////////////////////////////Insert Anime Data Section///////////////////////////////////////////////
 
@@ -82,7 +82,7 @@ class anilist_cacheManager
                 /////////////////////////////////Insert Characters Data Section//////////////////////////////////////////
                     foreach($anime_data['characters'] as $character) {
 
-                        $character_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/character/'.$character['id'].'/page?access_token='.$this->options['anilist_token']);
+                        $character_data = anilist_queryManager::Instance()->getBody('https://anilist.co/api/character/'.$character['id'].'/page?access_token='.anilist_optionManager::Instance()->get_token());
 
                         if (isset($character['actor'][0])) {
                             anilist_connectionManager::Instance()->insert('wp_anilist_characters',array(
@@ -156,7 +156,7 @@ class anilist_cacheManager
 
     public function cacheProfile() {
 
-        $response = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.$this->options['anilist_username'].'?access_token='.$this->options['anilist_token']);
+        $response = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.anilist_optionManager::Instance()->get_username().'?access_token='.anilist_optionManager::Instance()->get_token());
 
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_profile');
 
