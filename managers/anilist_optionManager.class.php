@@ -72,7 +72,7 @@ class anilist_optionManager {
 
     public function load_options() {
 
-        self::$instance->anilist_options = get_option(self::ANILIST_OPTIONS);
+        $this->anilist_options = get_option(self::ANILIST_OPTIONS);
 
     }
 
