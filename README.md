@@ -28,7 +28,7 @@ Working functionalities :
 
 ###Notes :
 
-_This plugin is still in development so diferent functionalities still need to be added_ like modify,add,delete elements to your profile/animelist.
+_This plugin is still in development so diferent functionalities still need to be added_ such as modify,add,delete elements to your profile/animelist.
 
 ##Project Structure
 
@@ -52,9 +52,9 @@ The plugin loads the API data directly in your database. These data can be refre
 
 Two files are involved in the cacheSystem : 
 
-- **anilist_cacheManager.class.php** in managers folder (contain cache function to get API data and insert them in your database)
+- **anilist_cacheManager.class.php** in 'managers' folder (contain cache function to get API data and insert them in your database)
 
-- **anilist_cacheLoader.php** in cache folder (contain the cache_loader function to check/refresh token and cache all data)
+- **template-anilist-cache.php** in 'templates' folder (this file uses anilist_cacheManager methods to check/refresh token and cache all data)
 
 >_Instructions on how to use the cache are explained in the Installation part_
 
@@ -75,40 +75,21 @@ Table names are the following :
 
 You just need to copy the wp-anilist directory in your wordpress plugin directory.
 Once you have done that, you have to enable the plugin
-(database tables will be automatically created)
+(database tables,options,pages and files will be automatically created)
 
-Then , in your admin dashboard, go to the **Settings->AniList API** and fill the diferent fields with your profile informations
+Then , in your admin dashboard, go to the **Settings->AniList API** and fill the diferent fields with your profile informations (username,client_id,client_secret and refresh_token)
+
+**IMPORTANT : When you disable the plugin , everything is removed (tables,options,pages and copied files) in order to keep your wordpress installation clean**
 
 **Cache System :**
 
-- You have to create a php template file containing the following code at the root of your theme directory :
+- A page called AniList Cache is automatically created. It is based on template-anilist-cache.php
 
-    
-        /* 
-        Template Name: AniList Cache Load
-        */
-    
-        get_header();
+- This page will check/refresh your token and load your animelist (+anime characters/staff) and your anilist profile in your wordpress database. (To avoid too many direct api calls)
 
-        if (!anilist_tokenManager::Instance()->isTokenValid()) {
+- The url of this page is : your_site_url/anilist-cache
 
-        $token = anilist_tokenManager::Instance()->options['anilist_token'];
-        echo "The token ".$token." is not valid anymore";
-
-        anilist_tokenManager::Instance()->refreshToken();
-
-        $token = anilist_tokenManager::Instance()->options['anilist_token'];
-        echo 'It was replaced by '.$token;
-
-        }
-
-        anilist_load_cache();
-
-        get_footer();
-
-- After that , create a new blank page based on the template 'AniList Cache Load' and run it .
-
-**IMPORTANT :You will use this page url with your cronJob/Task to refresh your API data**
+**IMPORTANT :You can use this page url with a cronJob/Task to refresh your API data**
 
 - And to display all of these data, you can create your own aniList template and put some code like this at the top :
 
@@ -133,11 +114,3 @@ _Note : $animelist is an array of anime objects_
 ##LICENSE
 
 This project is licensed under the GNU Public License 3.0
-
-
-    
-
-
-
-
-
