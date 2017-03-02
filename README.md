@@ -54,7 +54,7 @@ Two files are involved in the cacheSystem :
 
 - **anilist_cacheManager.class.php** in 'managers' folder (contain cache function to get API data and insert them in your database)
 
-- **template-anilist-cache.php** in 'templates' folder (this file uses anilist_cacheManager methods to check/refresh token and cache all data)
+- **template-anilist-cache.php** in 'templates' folder (this file uses anilist_cacheManager methods to check/refresh token and cache all data to avoid too many direct api calls)
 
 >_Instructions on how to use the cache are explained in the Installation part_
 
@@ -85,13 +85,9 @@ Then , in your admin dashboard, go to the **Settings->AniList API** and fill the
 
 - A page called AniList Cache is automatically created. It is based on template-anilist-cache.php
 
-- This page will check/refresh your token and load your animelist (+anime characters/staff) and your anilist profile in your wordpress database. (To avoid too many direct api calls)
-
 - The url of this page is : your_site_url/anilist-cache
 
-**IMPORTANT :You can use this page url with a cronJob/Task to refresh your API data**
-
-- And to display all of these data, you can create your own aniList template and put some code like this at the top :
+- To display all of these data, you can create your own aniList template and put some code like this at the top :
 
 
         /*
