@@ -48,13 +48,13 @@ The project contains the following folders :
 
 ##Cache System
 
-The plugin loads the API data directly in your database. These data can be refreshed periodically by using a cron Task / Job. You can use a cron Job by using the cronJob of Wordpress or create yours directly on your webServer.
+The plugin loads the API data directly in your database to avoid too many direct api calls. These data can be refreshed periodically by using a cron Task / Job. You can use a cron Job by using the cronJob of Wordpress or create yours directly on your webServer.
 
 Two files are involved in the cacheSystem : 
 
 - **anilist_cacheManager.class.php** in 'managers' folder (contain cache function to get API data and insert them in your database)
 
-- **template-anilist-cache.php** in 'templates' folder (this file uses anilist_cacheManager methods to check/refresh token and cache all data to avoid too many direct api calls)
+- **template-anilist-cache.php** in 'templates' folder (this file uses anilist_cacheManager methods to check/refresh token and cache all data)
 
 >_Instructions on how to use the cache are explained in the Installation part_
 
