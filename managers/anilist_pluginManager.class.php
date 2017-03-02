@@ -8,6 +8,7 @@ class anilist_pluginManager {
     private $instance = null;
 
     const ANILIST_CACHE = 'Anilist Cache';
+	const ANILIST_ACTION = 'Anilist Action';
 
     private function __construct()
     {
@@ -79,6 +80,24 @@ class anilist_pluginManager {
             wp_insert_post($cache_page_info);
 
         }
+		
+		////////////////// Create Anilist Action Page ///////////////////////////
+		
+		$cache_page_info = array(
+            'comment_status' => 'closed',
+            'ping_status' => 'closed',
+            'post_title' => self::ANILIST_ACTION,
+            'post_author' => '1',
+            'post_status' => 'publish',
+            'post_type' => 'page',
+            'post_name' => 'anilist-action',
+            'page_template' => 'template-anilist-action.php'
+        );
+
+        if (null == get_page_by_title(self::ANILIST_ACTION)) {
+            wp_insert_post($cache_page_info);
+
+        }
 
     }
 
@@ -89,6 +108,12 @@ class anilist_pluginManager {
         if (null != $cache_page) {
             wp_delete_post($cache_page->ID, true);
         }
+		
+		$action_page = get_page_by_title(self::ANILIST_ACTION);
+
+        if (null != $action_page) {
+            wp_delete_post($action_page->ID, true);
+        }
 
     }
 
@@ -97,6 +122,10 @@ class anilist_pluginManager {
         if (!file_exists(get_template_directory() . '/template-anilist-cache.php')) {
             copy(dirname(__FILE__,2) . '/templates/template-anilist-cache.php', get_template_directory() . '/template-anilist-cache.php');
         }
+		
+		if (!file_exists(get_template_directory() . '/template-anilist-action.php')) {
+            copy(dirname(__FILE__,2) . '/templates/template-anilist-action.php', get_template_directory() . '/template-anilist-action.php');
+        }
 
     }
 
@@ -104,6 +133,10 @@ class anilist_pluginManager {
 
         if (file_exists(get_template_directory() . '/template-anilist-cache.php')) {
             unlink(get_template_directory() . '/template-anilist-cache.php');
+        }
+		
+		if (file_exists(get_template_directory() . '/template-anilist-action.php')) {
+            unlink(get_template_directory() . '/template-anilist-action.php');
         }
     }
 

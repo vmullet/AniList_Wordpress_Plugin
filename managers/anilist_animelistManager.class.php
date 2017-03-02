@@ -219,8 +219,81 @@ public function SearchAnime($keyword) {
 	
 }
 
+public function AddAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched) {
+	
+	$args = array(
+	'headers' => array(
+		'content-Type' => 'application/x-www-form-urlencoded'
+	),
+	'body' => array(
+		'id' => $series_id,
+		'list_status' => $list_status,
+		'score' => $score_type,
+		'score_raw' => $score_raw,
+		'episodes_watched' => $episodes_watched,
+		'rewatched' => $nb_rewatched,
+		'access_token' => anilist_optionManager::Instance()->get_token()
+	)
+	
+	);
+	
+	$response = anilist_queryManager::Instance()->post('https://anilist.co/api/animelist',$args,false);
+	
+	echo $response;
+	
+}
 
 
+public function RemoveAnime($series_id) {
+	
+	$args = array(
+	'headers' => array(
+		'content-Type' => 'application/x-www-form-urlencoded'
+	),
+	'body' => array(
+		'access_token' => anilist_optionManager::Instance()->get_token()
+	)
+	
+	);
+	
+	$response = anilist_queryManager::Instance()->delete('https://anilist.co/api/animelist/'.$series_id,$args,false);
+	
+	if ($response=='1') {
+		echo 'Success';
+	}
+	else {
+		echo 'Fail';
+	}
+	
+	
+}
+
+
+
+public function UpdateAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched) {
+	
+	$args = array(
+	'headers' => array(
+		'content-Type' => 'application/x-www-form-urlencoded'
+	),
+	'body' => array(
+		'id' => $series_id,
+		'list_status' => $list_status,
+		'score' => $score,
+		'score_raw' => $score_raw,
+		'episodes_watched' => $episodes_watched,
+		'rewatched' => $nb_rewatched,
+		'access_token' => anilist_optionManager::Instance()->get_token()
+	)
+	
+	);
+	
+	$response = anilist_queryManager::Instance()->put('https://anilist.co/api/animelist',$args,false);
+	
+	echo $response;
+	
+	
+}
 
 
 }

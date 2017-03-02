@@ -52,26 +52,45 @@ public function getStatusCode($url) {
 
 
 
-public function post($url) {
+public function post($url,$args,$decode) {
 
-    $response = wp_remote_post($url);
+    $response = wp_remote_post($url,$args);
     $response = wp_remote_retrieve_body($response);
-    $response = json_decode($response,true);
-
+	if ($decode) {
+		$response = json_decode($response,true);
+	}
+    
     return $response;
+	
 }
 
-public function put($url) {
+public function put($url,$args,$decode) {
 
-    $response = wp_remote_request($url,array(
-
-        'method' => 'PUT'
-    ));
+	$args['method'] = 'PUT';
+	
+    $response = wp_remote_request($url,$args);
     $response = wp_remote_retrieve_body($response);
+	if ($decode) {
     $response = json_decode($response,true);
+	}
 
     return $response;
 
+}
+
+public function delete($url,$args,$decode) {
+	
+	$args['method'] = 'DELETE';
+	
+	$response = wp_remote_request($url,$args);
+	$response = wp_remote_retrieve_body($response);
+	
+	if ($decode) {
+		$response = json_decode($response,true);
+	}
+	
+	return $response;
+	
 }
 
 public function request($url,$method) {

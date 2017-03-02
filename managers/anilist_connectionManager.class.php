@@ -46,6 +46,22 @@ class anilist_connectionManager {
 
     }
 
+    public function update($table_name, $values, $where)
+    {
+
+
+        global $wpdb;
+        $result = $wpdb->update(
+            $table_name,
+            $values,
+            $where
+
+        );
+
+        return $result;
+
+    }
+
     public function delete($table_name,$values) {
 
 
