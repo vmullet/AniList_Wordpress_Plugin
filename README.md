@@ -34,8 +34,6 @@ _This plugin is still in development so diferent functionalities still need to b
 
 The project contains the following folders :
 
-- cache : Folder containing files related to the cacheSystem
-
 - managers : Folder containing manager classes which are generic php singleton (Some can be reused easily in other plugins)
 
 - menu : Folder containing files related to the settings page (functions to register/display the plugin menu in the settings page)
@@ -43,6 +41,8 @@ The project contains the following folders :
 - model : Folder containing the diferent classes for a better management in your template
 
 - sql : Folder containing sql scripts to create tables to store aniList API data (automatically created when plugin is enabled)
+
+- templates : Folder containing templates pages to manage actions such as caching data,api actions (add,update,delete)
 
 >_At the root folder, you have the main file of the plugin : wp-anilist.php_
 
