@@ -83,7 +83,7 @@ class anilist_pluginManager {
 		
 		////////////////// Create Anilist Action Page ///////////////////////////
 		
-		$cache_page_info = array(
+		$action_page_info = array(
             'comment_status' => 'closed',
             'ping_status' => 'closed',
             'post_title' => self::ANILIST_ACTION,
@@ -95,7 +95,7 @@ class anilist_pluginManager {
         );
 
         if (null == get_page_by_title(self::ANILIST_ACTION)) {
-            wp_insert_post($cache_page_info);
+            wp_insert_post($action_page_info);
 
         }
 

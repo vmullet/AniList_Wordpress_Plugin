@@ -6,6 +6,7 @@ class anilist_anime {
     private $list_status;
     private $score;
     private $episodes_watched;
+    private $nb_rewatched;
     private $notes;
     private $started_on;
     private $finished_on;
@@ -57,12 +58,13 @@ class anilist_anime {
      * @param $popularity
      * @param $adult
      */
-    public function __construct($series_id, $list_status, $score, $episodes_watched, $notes, $started_on, $finished_on, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $season, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
+    public function __construct($series_id, $list_status, $score, $episodes_watched, $nb_rewatched, $notes, $started_on, $finished_on, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $season, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
     {
         $this->series_id = $series_id;
         $this->list_status = $list_status;
         $this->score = $score;
         $this->episodes_watched = $episodes_watched;
+        $this->nb_rewatched = $nb_rewatched;
         $this->notes = $notes;
         $this->started_on = $started_on;
         $this->finished_on = $finished_on;
@@ -150,6 +152,22 @@ class anilist_anime {
     public function setEpisodesWatched($episodes_watched)
     {
         $this->episodes_watched = $episodes_watched;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbRewatched()
+    {
+        return $this->nb_rewatched;
+    }
+
+    /**
+     * @param mixed $nb_rewatched
+     */
+    public function setNbRewatched($nb_rewatched)
+    {
+        $this->nb_rewatched = $nb_rewatched;
     }
 
     /**

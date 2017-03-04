@@ -18,21 +18,24 @@ $episodes_watched = $_POST['episodes_watched'];
 
 $nb_rewatched = $_POST['nb_rewatched'];
 
+$notes = $_POST['notes'];
+
 switch($action) {
 	
 	case 'add':
-	    anilist_animelistManager::Instance()->AddAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched);
+	    anilist_animelistManager::Instance()->AddAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched,$notes);
+		anilist_cacheManager::Instance()->cacheAnimeById($series_id);
 	break;
 	
 	case 'update':
 
-        anilist_animelistManager::Instance()->UpdateAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched);
+        anilist_animelistManager::Instance()->UpdateAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched,$notes);
         anilist_connectionManager::Instance()->update('wp_anilist_animelist',array(
                 'list_status' => $list_status,
                 'score' => $score_raw,
                 'episodes_watched' => $episodes_watched,
-                'nb_rewatched' => $nb_rewatched
-
+                'rewatched' => $nb_rewatched,
+                'notes' => $notes
         ),
             array( 'series_id' => $series_id )
             );

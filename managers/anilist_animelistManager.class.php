@@ -37,6 +37,7 @@ public function LoadAnimeList() {
         $anime_data['list_status'],
         $anime_data['score'],
         $anime_data['episodes_watched'],
+        $anime_data['rewatched'],
         $anime_data['notes'],
         $anime_data['started_on'],
         $anime_data['finished_on'],
@@ -76,6 +77,7 @@ public function LoadAnime($anime_id) {
         $anime_data['list_status'],
         $anime_data['score'],
         $anime_data['episodes_watched'],
+        $anime_data['nb_rewatched'],
         $anime_data['notes'],
         $anime_data['started_on'],
         $anime_data['finished_on'],
@@ -184,6 +186,7 @@ public function SearchAnime($keyword) {
         '#list_status',
         $anime_data['score'],
         '-1',
+        '0',
         $anime_data['notes'],
         $anime_data['started_on'],
         $anime_data['finished_on'],
@@ -219,27 +222,34 @@ public function SearchAnime($keyword) {
 	
 }
 
-public function AddAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched) {
+public function AddAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched,$notes) {
 	
 	$args = array(
 	'headers' => array(
-		'content-Type' => 'application/x-www-form-urlencoded'
+		'Content-Type' => 'application/x-www-form-urlencoded',
+		'Authorization' => 'Bearer '.anilist_optionManager::Instance()->get_token()
 	),
 	'body' => array(
+		
 		'id' => $series_id,
 		'list_status' => $list_status,
 		'score' => $score_type,
 		'score_raw' => $score_raw,
 		'episodes_watched' => $episodes_watched,
 		'rewatched' => $nb_rewatched,
-		'access_token' => anilist_optionManager::Instance()->get_token()
+		'notes' => $notes
 	)
 	
 	);
 	
-	$response = anilist_queryManager::Instance()->post('https://anilist.co/api/animelist',$args,false);
+	$response = anilist_queryManager::Instance()->post('https://anilist.co/api/animelist?id='.$series_id,$args,true);
 	
-	echo $response;
+	if (isset($response['series_id'])) {
+		echo 'Success';
+	}
+	else {
+		echo 'Fail';
+	}
 	
 }
 
@@ -270,11 +280,12 @@ public function RemoveAnime($series_id) {
 
 
 
-public function UpdateAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched) {
+public function UpdateAnime($series_id,$list_status,$score_type,$score_raw,$episodes_watched,$nb_rewatched,$notes) {
 	
 	$args = array(
 	'headers' => array(
-		'content-Type' => 'application/x-www-form-urlencoded'
+		'Content-Type' => 'application/x-www-form-urlencoded',
+		'Authorization' => 'Bearer '.anilist_optionManager::Instance()->get_token()
 	),
 	'body' => array(
 		'id' => $series_id,
@@ -283,14 +294,19 @@ public function UpdateAnime($series_id,$list_status,$score_type,$score_raw,$epis
 		'score_raw' => $score_raw,
 		'episodes_watched' => $episodes_watched,
 		'rewatched' => $nb_rewatched,
-		'access_token' => anilist_optionManager::Instance()->get_token()
+		'notes' => $notes 
 	)
 	
 	);
 	
-	$response = anilist_queryManager::Instance()->put('https://anilist.co/api/animelist',$args,false);
+	$response = anilist_queryManager::Instance()->put('https://anilist.co/api/animelist',$args,true);
 	
-	echo $response;
+	if (isset($response['series_id'])) {
+		echo 'Success';
+	}
+	else {
+		echo 'Fail';
+	}
 	
 	
 }
