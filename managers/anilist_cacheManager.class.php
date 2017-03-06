@@ -41,7 +41,7 @@ class anilist_cacheManager
 
                 /////////////////////////////////Insert Anime Data Section///////////////////////////////////////////////
 				
-                anilist_connectionManager::Instance()->insert('wp_anilist_animeList',array(
+                anilist_connectionManager::Instance()->insert('wp_anilist_animelist',array(
 
                     'record_id' => $record['record_id'],
                     'series_id' => $record['series_id'],
