@@ -12,7 +12,7 @@ The plugin uses a cache system to load the data from your aniList profile direct
 
 etc...
 
-##Functionalities
+## Functionalities
 
 Actually, the plugin uses the Oauth 2.0 system with aniList API so the token is refreshed when it becomes invalid (token validity checked just before to cache your data)
 
@@ -26,7 +26,7 @@ Working functionalities :
 
 - Get anime characters with all data (seiyuu included , check anilist_character.class.php)
 
-###Notes :
+### Notes :
 
 _This plugin is still in development so diferent functionalities still need to be added_ such as modify,add,delete elements to your profile/animelist.
 
@@ -46,7 +46,7 @@ The project contains the following folders :
 
 >_At the root folder, you have the main file of the plugin : wp-anilist.php_
 
-##Cache System
+## Cache System
 
 The plugin loads the API data directly in your database to avoid too many direct api calls. These data can be refreshed periodically by using a cron Task / Job. You can use a cron Job by using the cronJob of Wordpress or create yours directly on your webServer.
 
@@ -59,7 +59,7 @@ Two files are involved in the cacheSystem :
 >_Instructions on how to use the cache are explained in the Installation part_
 
 
-##Database System
+## Database System
 
 All API data are stored in your wordpress database. SQL scripts to create these tables are stored in the sql folder
 
@@ -71,7 +71,7 @@ Table names are the following :
 - wp_anilist_staff
 
 
-##Installation
+## Installation
 
 You just need to copy the wp-anilist directory in your wordpress plugin directory.
 Once you have done that, you have to enable the plugin
@@ -107,6 +107,6 @@ _Note : $animelist is an array of anime objects_
         $anime->getAnimeTitleEnglish();
        
         
-##LICENSE
+## LICENSE
 
 This project is licensed under the GNU Public License 3.0
