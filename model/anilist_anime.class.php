@@ -7,9 +7,6 @@ class anilist_anime {
     private $score;
     private $episodes_watched;
     private $nb_rewatched;
-    private $notes;
-    private $started_on;
-    private $finished_on;
     private $added_time;
     private $updated_time;
     private $anime_title_romaji;
@@ -58,16 +55,13 @@ class anilist_anime {
      * @param $popularity
      * @param $adult
      */
-    public function __construct($series_id, $list_status, $score, $episodes_watched, $nb_rewatched, $notes, $started_on, $finished_on, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $season, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
+    public function __construct($series_id, $list_status, $score, $episodes_watched, $nb_rewatched, $added_time, $updated_time, $anime_title_romaji, $anime_title_english, $anime_title_japanese, $description, $anime_type, $season, $start_date_airing, $end_date_airing, $genres, $studio_name, $average_score, $img_lge, $img_banner, $total_episodes, $airing_status, $popularity, $adult)
     {
         $this->series_id = $series_id;
         $this->list_status = $list_status;
         $this->score = $score;
         $this->episodes_watched = $episodes_watched;
         $this->nb_rewatched = $nb_rewatched;
-        $this->notes = $notes;
-        $this->started_on = $started_on;
-        $this->finished_on = $finished_on;
         $this->added_time = $added_time;
         $this->updated_time = $updated_time;
         $this->anime_title_romaji = $anime_title_romaji;
@@ -168,54 +162,6 @@ class anilist_anime {
     public function setNbRewatched($nb_rewatched)
     {
         $this->nb_rewatched = $nb_rewatched;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * @param mixed $notes
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStartedOn()
-    {
-        return $this->started_on;
-    }
-
-    /**
-     * @param mixed $started_on
-     */
-    public function setStartedOn($started_on)
-    {
-        $this->started_on = $started_on;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFinishedOn()
-    {
-        return $this->finished_on;
-    }
-
-    /**
-     * @param mixed $finished_on
-     */
-    public function setFinishedOn($finished_on)
-    {
-        $this->finished_on = $finished_on;
     }
 
     /**
