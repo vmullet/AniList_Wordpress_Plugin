@@ -46,7 +46,6 @@ public function getStatusCode($url) {
     $response = wp_remote_get($url);
     $code = wp_remote_retrieve_response_code($response);
 
-
     return $code;
 }
 

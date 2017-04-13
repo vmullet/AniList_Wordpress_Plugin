@@ -97,9 +97,6 @@ abstract class anilist_person {
         $this->series_id = $series_id;
     }
 
-
-
-
 }
 
 

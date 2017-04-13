@@ -4,7 +4,6 @@ require_once ('anilist_person.class.php');
 
 class anilist_staff extends anilist_person {
 
-
     private $language;
 
     public function __construct($name_first,$name_last,$language,$img_lge,$role,$series_id)
@@ -29,9 +28,6 @@ class anilist_staff extends anilist_person {
     {
         $this->language = $language;
     }
-
-
-
 
 }
 

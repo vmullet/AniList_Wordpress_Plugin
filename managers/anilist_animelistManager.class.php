@@ -1,9 +1,8 @@
 <?php
 
-include_once(dirname(__FILE__).'/anilist_connectionManager.class.php');
-include_once(dirname(__FILE__,2) . '/model/anilist_anime.class.php');
-include_once(dirname(__FILE__,2) . '/model/anilist_character.class.php');
-include_once(dirname(__FILE__,2) . '/model/anilist_staff.class.php');
+require_once(dirname(__FILE__,2) . '/model/anilist_anime.class.php');
+require_once(dirname(__FILE__,2) . '/model/anilist_character.class.php');
+require_once(dirname(__FILE__,2) . '/model/anilist_staff.class.php');
 
 
 class anilist_animelistManager{

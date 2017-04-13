@@ -1,8 +1,5 @@
 <?php
 
-require_once('anilist_queryManager.class.php');
-
-
 class anilist_tokenManager {
 
     private static $instance = null;

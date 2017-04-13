@@ -49,9 +49,6 @@ class anilist_cacheManager
                     'score' => $record['score'],
                     'episodes_watched' => $record['episodes_watched'],
                     'rewatched' => $record['rewatched'],
-                    'notes' => $record['notes'],
-                    'started_on' => $record['started_on'],
-                    'finished_on' => $record['finished_on'],
                     'added_time' => $record['added_time'],
                     'updated_time' => $record['updated_time'],
                     'anime_title_romaji' => $anime_data['title_romaji'],
@@ -68,6 +65,7 @@ class anilist_cacheManager
                     'img_lge' => $anime_data['image_url_lge'],
                     'img_banner' => $anime_data['image_url_banner'],
                     'total_episodes' => $anime_data['total_episodes'],
+					'duration' => $anime_data['duration'],
                     'airing_status' => $anime_data['airing_status'],
                     'popularity' => $anime_data['popularity'],
                     'adult' => $anime_data['adult']
@@ -289,6 +287,7 @@ class anilist_cacheManager
 	}
 	
 	 public function cacheProfile() {
+		 
         $response = anilist_queryManager::Instance()->getBody('https://anilist.co/api/user/'.anilist_optionManager::Instance()->get_username().'?access_token='.anilist_optionManager::Instance()->get_token());
         anilist_connectionManager::Instance()->query('Delete from wp_anilist_profile');
         $total_anime = $response['stats']['status_distribution']['anime']['watching']
@@ -301,6 +300,7 @@ class anilist_cacheManager
             'username' => $response['display_name'],
             'anime_time' => $response['anime_time'],
             'avatar' => $response['image_url_lge'],
+			'description' => $response['about'],
             'nb_anime_watching' => $response['stats']['status_distribution']['anime']['watching'],
             'nb_anime_plan_watch' => $response['stats']['status_distribution']['anime']['plan to watch'],
             'nb_anime_completed' => $response['stats']['status_distribution']['anime']['completed'],
@@ -308,6 +308,7 @@ class anilist_cacheManager
             'nb_anime_onhold' => $response['stats']['status_distribution']['anime']['on-hold'],
             'nb_anime_total' => $total_anime
         ));
+		
     }
 
 }

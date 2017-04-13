@@ -1,7 +1,5 @@
 <?php
 
-require_once('anilist_optionManager.class.php');
-
 class anilist_pluginManager {
 
 

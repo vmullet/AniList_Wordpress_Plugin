@@ -11,7 +11,6 @@ class anilist_optionManager {
     private $anilist_options = array();
 
     const ANILIST_OPTIONS = 'anilist_options';
-
     const ANILIST_USERNAME = 'anilist_username';
     const ANILIST_CLIENT_ID = 'anilist_client_id';
     const ANILIST_CLIENT_SECRET = 'anilist_client_secret';
@@ -65,8 +64,8 @@ class anilist_optionManager {
     public function erase_options() {
 
         if (isset($this->anilist_options)) {
+			$this->anilist_options = null;
             delete_option(self::ANILIST_OPTIONS);
-            $this->anilist_options = null;
         }
     }
 

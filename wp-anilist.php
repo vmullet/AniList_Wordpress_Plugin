@@ -9,8 +9,8 @@
  * Description: A plugin to manage your anime list
  */
 
-include_once('menu/anilist-menu-register.php');
-include_once('menu/anilist-menu-displayer.php');
+require_once('menu/anilist-menu-register.php');
+require_once('menu/anilist-menu-displayer.php');
 
 require_once('managers/anilist_pluginManager.class.php');
 require_once('managers/anilist_tokenManager.class.php');

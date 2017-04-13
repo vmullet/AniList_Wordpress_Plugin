@@ -7,7 +7,6 @@ class anilist_character extends anilist_person {
 
     private $character_id;
     private $info;
-
     private $actor;
 
 
